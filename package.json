@@ -1,0 +1,17 @@
+{
+  "name": "urlshortner_nodejs",
+  "version": "1.0.0",
+  "description": "URL shortner and using this we can check number of visit on URL",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.2",
+    "nodemon": "^3.1.4"
+  }
+}
