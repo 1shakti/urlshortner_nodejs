@@ -8,12 +8,15 @@ async function handleGenerateShortId(req, res) {
   }
   const uid = new ShortUniqueId({ length: 10 });
   const shortId = uid.rnd();
-  const result = await shortUrlModel.create({
+  await shortUrlModel.create({
     shortId,
     redirectURL: body.url,
     visitHistory: [],
   });
-  return res.status(201).json({ status: "Success", id: result._id, shortId });
+  return res.render('home',{
+    shortId
+  })
+  //return res.status(201).json({ status: "Success", id: result._id, shortId });
 }
 
 async function handleGetShortIdToRedirectURL(req, res) {
