@@ -10,10 +10,14 @@ const ShortUrlSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    visitHistory: [{timestamp:{type: Number}}]
+    visitHistory: [{timestamp:{type: Number}}],
+    createdBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "shorturl-users"
+    }
 
 },{timestamps: true})
 
-const shortUrlModel = mongoose.model('url', ShortUrlSchema);
+const shortUrlModel = mongoose.model('urls', ShortUrlSchema);
 
 module.exports = shortUrlModel;

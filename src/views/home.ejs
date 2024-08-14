@@ -55,7 +55,7 @@
           </tr>
         </thead>
         <tbody>
-          <% let i = 1; %> <% urls.forEach(function(data) { %>
+          <% let i = 1; %> <% urls?.sort((a,b) => b.createdAt - a.createdAt)?.forEach(function(data) { %>
           <tr>
             <td><%= i++ %></td>
             <td><%= data.shortId %></td>
