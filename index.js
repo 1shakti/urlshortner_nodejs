@@ -3,7 +3,7 @@ const path = require("path");
 const { logReqRes } = require("./src/middlewares");
 const { connectMongoDB } = require("./connect");
 const cookieParser = require("cookie-parser");
-const { restrictToLoggedInuserOnly, checkAuth } = require("./src/middlewares/auth");
+const { restrictTo, checkForAuthentication } = require("./src/middlewares/auth");
 const app = express();
 const PORT = 8002;
 
@@ -25,10 +25,11 @@ app.set("views", path.resolve("./src/views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(checkForAuthentication)
 app.use(logReqRes("./log.txt"));
 
-app.use("/api/url", restrictToLoggedInuserOnly, urlRoutes);
-app.use("/",checkAuth ,staticRoute);
+app.use("/api/url", restrictTo(['NORMAL','ADMIN']), urlRoutes);
+app.use("/" ,staticRoute);
 app.use("/api/users", usersRoute);
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));

@@ -13,9 +13,14 @@ const usersSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true
+    },
+    role:{
+        type: String,
+        required: true,
+        default: "NORMAL"
     }
 },{timestamps: true});
 
-const usersModel = mongoose.model('shorturl-users',usersSchema);
+const usersModel = mongoose.model('shorturlusers',usersSchema);
 
 module.exports = usersModel; 

@@ -19,9 +19,19 @@ async function handleLoginUser(req, res) {
     if(!user) return res.render('Login',{
         error:'invalid email or password'
     })
-    const sessionId = uuidv4();
-    setUser(sessionId,user);
-    res.cookie('uid',sessionId);
+    //************************** statefull authenticaation *********************//
+
+    // const sessionId = uuidv4();
+    // setUser(sessionId,user);
+    // res.cookie('uid',sessionId);
+    
+    const token = setUser(user);
+    res.cookie('uid',token, {
+        httpOnly: true, // Prevents JavaScript access
+        secure: false, // Only send over HTTPS in production
+        sameSite: 'Lax', // Controls cross-site request behavior
+        maxAge: 3600000 // Cookie expiration time (e.g., 1 hour)
+      });
     return res.redirect('/')
 }
 
